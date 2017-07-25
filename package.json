@@ -1,0 +1,29 @@
+{
+  "name": "config-finder",
+  "version": "1.0.0",
+  "description": "Autoload config for a specific module",
+  "engines": {
+    "node": ">=0.12"
+  },
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard"
+  },
+  "dependencies": {
+    "cosmiconfig": "^2.2.2"
+  },
+  "devDependencies": {
+    "@fedor/standard": "^1.0.1"
+  },
+  "keywords": [
+    "rc",
+    "config",
+    "finder",
+    "package"
+  ],
+  "author": {
+    "name": "allex",
+    "email": "allex.wxn@gmail.com"
+  },
+  "license": "MIT"
+}

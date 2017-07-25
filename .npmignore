@@ -1,0 +1,17 @@
+.DS_Store
+.idea
+.git
+.gitignore
+.lintcache
+.babelrc
+.npmignore
+t.*
+[a-z0-9].*
+*.log
+*.tgz
+node_modules
+npm-debug.log
+yarn.lock
+package-lock.json
+src
+test
