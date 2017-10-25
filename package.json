@@ -1,6 +1,6 @@
 {
   "name": "config-finder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Autoload config for a specific module",
   "engines": {
     "node": ">=0.12"

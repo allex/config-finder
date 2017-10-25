@@ -5,7 +5,8 @@ var config = require('cosmiconfig')
 var assign = Object.assign
 
 /**
- * Autoload Config for specific module name.
+ * Autoload Config for specific module name, support lazy-init config by a context
+ * function calling
  *
  * @param {String} moduleName You module name. This is used to create the default
  * filenames that cosmiconfig will look for.
@@ -25,21 +26,20 @@ module.exports = function(moduleName) {
 
     if (!ctx.env) process.env.NODE_ENV = 'development'
 
-    var file
-
+    var filepath
     return config(moduleName, options)
       .load(path)
       .then(function (result) {
-        if (!result) throw Error('No FSS Config found in: ' + path)
-        file = result ? result.filepath : ''
+        if (!result) throw Error('No config found in: ' + path)
+        filepath = result ? result.filepath : ''
         return result ? result.config : {}
       })
       .then(function (config) {
         if (typeof config === 'function') config = config(ctx)
         else config = assign(config, ctx)
         return {
-          file: file,
-          options: config
+          filepath,
+          config
         }
       })
   }
