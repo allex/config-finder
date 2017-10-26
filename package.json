@@ -1,19 +1,28 @@
 {
   "name": "config-finder",
-  "version": "1.0.1",
+  "version": "1.0.2-beta.1",
   "description": "Autoload config for a specific module",
   "engines": {
     "node": ">=0.12"
   },
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "lint": "standard"
+    "build": "babel -d lib src/",
+    "watch": "babel -w -d lib src/",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "test": "npm run lint",
+    "prepublishOnly": "npm test && npm run build"
   },
   "dependencies": {
     "cosmiconfig": "^2.2.2"
   },
   "devDependencies": {
-    "@fedor/standard": "^1.0.1"
+    "@fedor/standard": "latest",
+    "babel-core": "^6.25.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.5.2",
+    "babel-runtime": "^6.26.0"
   },
   "keywords": [
     "rc",
