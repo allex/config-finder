@@ -2,9 +2,21 @@
 
 Find and load a configuration object. based on [cosmiconfig][1]
 
-$ cat package.json
+## Installation
 
-```json
+```sh
+npm i config-finder
+```
+
+## Features
+
+- Support functionaly evaluation with customize context.
+- Mixin multiple externals by `extends` property.
+
+## Usage
+
+```js
+// cat package.json
 {
   ...
 
@@ -15,13 +27,19 @@ $ cat package.json
     "foo": [ "bar" ]
   }
 }
+
+// cat ./.fssrc.js
+module.exports = (ctx) => {
+  return Object.assign({}, ctx,
+    {
+      rollup: { /* input, output */ }
+    }
+}
 ```
 
 ```js
-const configFinder = require('config-finder');
-
+const configFinder = require('config-finder')
 const yourModuleName = 'fss'
-
 const modConfig = configFinder(yourModuleName)
  
 const cfg = modConfig(ctx[, path, options])
@@ -32,22 +50,6 @@ const cfg = modConfig(ctx[, path, options])
   .catch((parsingError) => {
     // do something constructive
   });
-```
-
-## Installation
-
-```sh
-npm i config-finder
-```
-
-## Features
-
-- Support functionaly module evaluation with customize context.
-- Support mixin configs by `extends` property.
-
-## Usage
-
-```js
 ```
 
 ## License
