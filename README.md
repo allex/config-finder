@@ -41,7 +41,7 @@ module.exports = (ctx) => {
 const configFinder = require('config-finder')
 const yourModuleName = 'fss'
 const modConfig = configFinder(yourModuleName)
- 
+
 const cfg = modConfig(ctx[, path, options])
   .then((result) => {
     // result.config is the parsed configuration object
@@ -50,6 +50,9 @@ const cfg = modConfig(ctx[, path, options])
   .catch((parsingError) => {
     // do something constructive
   });
+
+// sync mode
+// const cfg = modConfig.sync(ctx[, path, options])
 ```
 
 ## License

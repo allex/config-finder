@@ -1,6 +1,6 @@
 {
   "name": "config-finder",
-  "version": "1.0.2-beta.2",
+  "version": "1.0.2-beta.4",
   "description": "Autoload config for a specific module",
   "keywords": [
     "rc",
@@ -27,16 +27,17 @@
     "prepublishOnly": "npm test && npm run build"
   },
   "dependencies": {
-    "cosmiconfig": "^2.2.2"
+    "cosmiconfig": "^3.1.0"
   },
   "devDependencies": {
     "@fedor/standard": "latest",
     "babel-core": "^6.25.0",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.5.2",
     "babel-runtime": "^6.26.0"
   },
   "engines": {
-    "node": ">=0.12"
+    "node": ">=4"
   }
 }
