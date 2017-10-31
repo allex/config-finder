@@ -24,6 +24,7 @@ module.exports = (moduleName) => {
   // ctx, path, options
   const explorer = (...args) => {
     const [ ctx, path, options ] = args
+    path = path ? resolve(path) : process.cwd()
 
     if ((options || 0).sync) {
       return explorer.sync(...args)
@@ -42,6 +43,7 @@ module.exports = (moduleName) => {
 
   explorer.sync = (ctx, path, options = {}) => {
     options = assign({}, options, { sync: true })
+    path = path ? resolve(path) : process.cwd()
 
     const result = loadConfig(...[ moduleName, ctx, path, options ])
     if (!result) throw Error('No config found in: ' + path)
@@ -57,7 +59,6 @@ module.exports = (moduleName) => {
 
 function loadConfig (moduleName, ctx, path, options) {
   ctx = assign({ cwd: process.cwd(), env: process.env.NODE_ENV }, ctx)
-  path = path ? resolve(path) : process.cwd()
 
   if (!ctx.env) process.env.NODE_ENV = 'development'
 
