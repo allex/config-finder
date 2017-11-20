@@ -23,7 +23,7 @@ module.exports = (moduleName) => {
 
   // ctx, path, options
   const explorer = (...args) => {
-    const [ ctx, path, options ] = args
+    let [ ctx, path, options ] = args
     path = path ? resolve(path) : process.cwd()
 
     if ((options || 0).sync) {
@@ -67,11 +67,13 @@ function loadConfig (moduleName, ctx, path, options) {
 }
 
 function normalizeResult ({ filepath, config, ctx }) {
-  var mixins
   // evaluate if a function module
   if (typeof config === 'function') config = config(ctx)
   else config = assign(config, ctx)
-  if ((mixins = config.extends || []).length) {
+
+  var mixins = config.extends
+  mixins = mixins ? (Array.isArray(mixins) ? mixins : [ mixins ]) : []
+  if (mixins.length) {
     var relative = p.dirname(filepath)
     mixins = mixins.map(module => {
       var m
@@ -86,6 +88,8 @@ function normalizeResult ({ filepath, config, ctx }) {
       return m
     })
   }
+
   config = assign.apply(Object, [ {}, ...mixins, config ])
+
   return { filepath, config }
 }
