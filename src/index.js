@@ -23,17 +23,16 @@ module.exports = (moduleName) => {
 
   // ctx, path, options
   const explorer = (...args) => {
-    let [ ctx, path, options ] = args
-    path = path ? resolve(path) : process.cwd()
+    let [ ctx, path, options ] = args // eslint-disable-line
 
+    path = path ? resolve(path) : process.cwd()
     if ((options || 0).sync) {
       return explorer.sync(...args)
     }
 
     return loadConfig(...[moduleName, ...args])
       .then(result => {
-        if (!result) throw Error('No config found in: ' + path)
-
+        result = result || {}
         var filepath = result.filepath || ''
         var config = result.config || {}
         return { filepath, config }
@@ -45,11 +44,9 @@ module.exports = (moduleName) => {
     options = assign({}, options, { sync: true })
     path = path ? resolve(path) : process.cwd()
 
-    const result = loadConfig(...[ moduleName, ctx, path, options ])
-    if (!result) throw Error('No config found in: ' + path)
-
-    var filepath = result.filepath || ''
-    var config = result.config || {}
+    const result = loadConfig(...[ moduleName, ctx, path, options ]) || {}
+    const filepath = result.filepath || ''
+    const config = result.config || {}
 
     return normalizeResult({ filepath, config, ctx })
   }
